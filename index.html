@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Liaaa 💖</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" />
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #ffd6e8, #ffe6f2);
+      font-family: 'Poppins', sans-serif;
+      color: #444;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      transition: background 1.5s ease, color 1.5s ease;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #ff6fa8;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 25px #ffb6e0; }
+    }
+
+    #startBtn {
+      background: #ff8fb1;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    #startBtn:hover { transform: scale(1.08); background: #ff73a6; }
+
+    #message {
+      display: none;
+      font-size: 20px;
+      max-width: 600px;
+      line-height: 1.6;
+      margin-top: 20px;
+      color: #555;
+      padding: 0 20px;
+      position: relative;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #message span.sparkle {
+      position: absolute;
+      font-size: 16px;
+      animation: sparkleFade 1.3s linear forwards;
+      color: #ff9cc6;
+    }
+    @keyframes sparkleFade {
+      0% { opacity: 1; transform: scale(0.8) translateY(0); }
+      100% { opacity: 0; transform: scale(1.6) translateY(-20px); }
+    }
+
+    #fromText {
+      display: none;
+      margin-top: 28px;
+      font-weight: 600;
+      color: #ff5c8a;
+      font-size: 22px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    /* Heart animation */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      width: 18px;
+      height: 18px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: floatUp 6s linear infinite;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before { top: -9px; left: 0; }
+    .heart::after  { left: 9px; top: 0; }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* Love question */
+    #loveQuestion {
+      display: none;
+      margin-top: 40px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    #loveQuestion button {
+      background: #ffb6c1;
+      border: none;
+      padding: 10px 22px;
+      margin: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    #loveQuestion button:hover { transform: scale(1.1); }
+    #noBtn { position: absolute; }
+
+    /* Shake effect */
+    @keyframes shake {
+      0% { transform: translate(0); }
+      25% { transform: translate(-4px, 4px); }
+      50% { transform: translate(4px, -4px); }
+      75% { transform: translate(-4px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    /* Music button */
+    #musicBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffb6c1;
+      border: none;
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      color: white;
+      font-size: 22px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: none;
+    }
+    #musicBtn:hover { transform: scale(1.1); background: #ff99b3; }
+
+    /* Hug button */
+    #hugBtn {
+      display: none;
+      margin-top: 25px;
+      background: #ffc6d9;
+      border: none;
+      color: #fff;
+      padding: 12px 28px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    #hugBtn:hover { background: #ff9cc6; transform: scale(1.05); }
+
+    /* Popup */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 200, 230, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #ff6fa8;
+      font-weight: bold;
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    /* Dreamy bokeh */
+    #bokeh {
+      position: fixed; inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 70%),
+                  radial-gradient(circle at 80% 60%, rgba(255,200,220,0.25) 0%, transparent 70%);
+      filter: blur(30px);
+      z-index: -1;
+      animation: moveBokeh 10s ease-in-out infinite alternate;
+    }
+    @keyframes moveBokeh {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-40px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="bokeh"></div>
+
+  <button id="startBtn">Klik dulu Liaaa 💖</button>
+
+  <div id="message"></div>
+  <div id="loveQuestion">
+    <h1>Do you love me, Liaaa? 😳💞</h1>
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+
+  <div id="fromText">From Rei untuk Liaaa 💌</div>
+  <button id="hugBtn">Peluk Liaa 🤗</button>
+  <div id="popup">I love you Liaaa 💗</div>
+
+  <button id="musicBtn">🎵</button>
+  <audio id="bgMusic" loop>
+    <source src="https://files.catbox.moe/x3pf5v.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const btn = document.getElementById("startBtn");
+    const msg = document.getElementById("message");
+    const loveQ = document.getElementById("loveQuestion");
+    const fromTxt = document.getElementById("fromText");
+    const hugBtn = document.getElementById("hugBtn");
+    const popup = document.getElementById("popup");
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+
+    const text = "Haloooo Liaa cantikss kamu cantikkk bangeetts dehh membuatt hari2 rei jadi tenang damai bahagia bngttt... semua cape2 ku yg ku genggam rasanya seperti tidak ada apa-apanya semenjak adaa liaa 😳💗 hehee cuma mau ngasihtau kalau rei syg bngt sama lia hm 🥺💞";
+
+    function typingEffect(el, txt, speed = 45) {
+      let i = 0;
+      function type() {
+        if (i < txt.length) {
+          el.innerHTML += txt.charAt(i);
+          if (Math.random() > 0.7) sparkle(el);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          setTimeout(()=> {
+            loveQ.style.display = "block";
+            setTimeout(()=> loveQ.style.opacity = "1", 100);
+          }, 900);
+        }
+      }
+      type();
+    }
+
+    function sparkle(el) {
+      const s = document.createElement("span");
+      s.className = "sparkle";
+      s.innerHTML = "✨";
+      s.style.left = Math.random() * 80 + "%";
+      s.style.top = Math.random() * 20 + "%";
+      el.appendChild(s);
+      setTimeout(()=> s.remove(), 1300);
+    }
+
+    btn.addEventListener("click", () => {
+      btn.style.display = "none";
+      msg.style.display = "block";
+      setTimeout(()=> msg.style.opacity = "1", 100);
+      typingEffect(msg, text);
+      createHearts();
+      music.volume = 0.35;
+      music.play().catch(()=>{});
+      musicBtn.style.display = "block";
+    });
+
+    // Hearts animation
+    function createHearts(){
+      setInterval(()=>{
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDuration = (4 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(), 6000);
+      }, 400);
+    }
+
+    // No button escape logic
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    noBtn.addEventListener("mouseover", ()=>{
+      noBtn.style.left = Math.random() * 80 + "%";
+      noBtn.style.top = Math.random() * 80 + "%";
+    });
+
+    yesBtn.addEventListener("click", ()=>{
+      loveQ.style.animation = "shake 0.4s";
+      setTimeout(()=> loveQ.style.animation = "", 400);
+      loveQ.innerHTML = "<h1>Hehehe aku tau kok Liaa sayang Rei 😳💞</h1>";
+      setTimeout(()=> {
+        fromTxt.style.display = "block";
+        hugBtn.style.display = "inline-block";
+        setTimeout(()=> {
+          fromTxt.style.opacity = "1";
+          hugBtn.style.opacity = "1";
+        }, 100);
+      }, 2000);
+    });
+
+    // Hug button
+    hugBtn.addEventListener("click", ()=>{
+      hugBtn.innerText = "🤗🤗🤗";
+      for(let i=0;i<20;i++){
+        setTimeout(()=>sparkle(hugBtn), i*80);
+      }
+      setTimeout(()=> popup.style.display = "flex", 1500);
+    });
+
+    // Music toggle
+    let playing = true;
+    musicBtn.addEventListener("click", ()=>{
+      if(playing){
+        music.pause();
+        musicBtn.innerText = "🔇";
+      } else {
+        music.play();
+        musicBtn.innerText = "🎵";
+      }
+      playing = !playing;
+    });
+  </script>
+</body>
+</html>
