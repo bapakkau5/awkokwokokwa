@@ -2,25 +2,39 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <title>Untuk Liaaa 💖</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --pink:#ff8fb1; --pink-2:#ffb6c1; --pink-3:#ffe6f2; --text:#444; --rose:#ff6fa8;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+
+    *{box-sizing:border-box}
+    html, body{
+      height:100%;
+      scroll-behavior:smooth;
+    }
+
     body{
       margin:0;
-      min-height:100dvh;
-      overflow-y:auto;
+      min-height:100vh;
+      overflow-y:auto;               /* ✅ aktifin scroll di mobile/iPhone */
       -webkit-overflow-scrolling:touch;
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:center;
+      justify-content:flex-start;    /* konten mulai dari atas biar aman */
+      padding-top:calc(16px + var(--safe-top));
+      padding-bottom:calc(18px + var(--safe-bottom));
+      padding-left:var(--safe-left);
+      padding-right:var(--safe-right);
       background:linear-gradient(180deg,#ffd6e8,#ffe6f2);
       color:var(--text);
       font-family:'Poppins',system-ui,sans-serif;
@@ -28,16 +42,36 @@
       position:relative;
       transition:background 1.5s ease;
       cursor:default;
-      padding:30px 10px 120px;
     }
-    h1{font-family:'Great Vibes',cursive;font-size:32px;color:var(--rose);animation:glow 2s ease-in-out infinite alternate;z-index:5}
-    @keyframes glow{from{text-shadow:0 0 10px #fff}to{text-shadow:0 0 25px #ffb6e0}}
-    #bokeh{position:fixed;inset:0;z-index:0;filter:blur(30px);
+
+    /* Bokeh latar */
+    #bokeh{
+      position:fixed; inset:0; z-index:0; filter:blur(30px);
       background:
         radial-gradient(circle at 20% 30%, rgba(255,255,255,.35) 0%, transparent 70%),
         radial-gradient(circle at 80% 60%, rgba(255,200,220,.28) 0%, transparent 70%);
-      animation:moveBokeh 10s ease-in-out infinite alternate}
-    @keyframes moveBokeh{from{transform:translateY(0)}to{transform:translateY(-40px)}}
+      animation:moveBokeh 10s ease-in-out infinite alternate
+    }
+    @keyframes moveBokeh{ from{transform:translateY(0)} to{transform:translateY(-40px)} }
+
+    h1{
+      font-family:'Great Vibes',cursive;
+      font-size:32px;
+      color:var(--rose);
+      animation:glow 2s ease-in-out infinite alternate;
+      position:relative; z-index:5;
+      margin:8px 12px;
+    }
+    @keyframes glow{from{text-shadow:0 0 10px #fff} to{text-shadow:0 0 25px #ffb6e0}}
+
+    .wrap{
+      width:100%;
+      max-width:720px;
+      position:relative;
+      z-index:5;
+      padding:8px 12px 24px;
+    }
+
     .btn{
       background:var(--pink);
       color:#fff;
@@ -48,78 +82,278 @@
       font-size:18px;
       box-shadow:0 6px 16px rgba(0,0,0,.15);
       cursor:pointer;
-      transition:.18s;
+      transition:transform .18s, background .18s, opacity .2s;
+      position:relative;
       z-index:10;
-      margin:10px;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select:none;
     }
-    .btn:hover{transform:scale(1.05);background:#ff73a6}
-    #message{display:none;opacity:0;transition:opacity 1s ease;max-width:680px;padding:0 16px;line-height:1.7;color:#555;z-index:5;position:relative}
-    #message span.sparkle{position:absolute;font-size:16px;color:#ff9cc6;animation:sparkleFade 1.3s linear forwards}
-    @keyframes sparkleFade{0%{opacity:1;transform:scale(.8) translateY(0)}100%{opacity:0;transform:scale(1.6) translateY(-20px)}}
-    .heart{position:fixed;bottom:-10px;width:18px;height:18px;background:pink;transform:rotate(45deg);animation:floatUp 6s linear infinite;z-index:1;opacity:.8}
-    .heart::before,.heart::after{content:'';position:absolute;width:18px;height:18px;background:pink;border-radius:50%}
-    .heart::before{top:-9px;left:0}.heart::after{top:0;left:9px}
-    @keyframes floatUp{0%{transform:translateY(0) rotate(45deg);opacity:1}100%{transform:translateY(-110vh) rotate(45deg);opacity:0}}
-    #quoteBox{display:none;position:fixed;top:18px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.5);
-      border:1px solid rgba(255,255,255,.6);padding:8px 14px;border-radius:999px;font-size:14px;color:#7a5c6d;z-index:6;opacity:0;transition:opacity .6s}
-    #loveQuestion{display:none;opacity:0;transition:opacity 1s ease;margin-top:28px;z-index:5;position:relative}
-    #fromText{display:none;opacity:0;transition:opacity 1s ease;margin-top:16px;font-family:'Great Vibes',cursive;font-size:26px;color:#ff5c8a;z-index:5}
-    #hugBtn{display:none;opacity:0;transition:opacity 1s ease;margin-top:18px;background:#ffc6d9}
-    #popup{display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;background:rgba(255,200,230,.85);backdrop-filter:blur(4px);animation:fadeIn .8s ease}
-    #popupInner{text-align:center;color:#ff6fa8}
-    #popupInner h2{font-family:'Great Vibes',cursive;font-size:40px;margin:0 0 6px}
-    #popupInner p{margin:6px 0 0;font-size:18px;color:#a64b73}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    #loveFlow{display:none;z-index:6;margin-top:24px}
-    #meter{width:80vw;max-width:520px;height:18px;background:#ffe4ee;border-radius:999px;margin:12px auto;position:relative;overflow:hidden;border:1px solid #ffd1e2}
-    #meterFill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,#ff9cc6,#ff73a6);box-shadow:0 0 12px rgba(255,115,166,.45) inset;transition:width .3s ease}
-    .c-heart{position:fixed;top:-10px;font-size:18px;animation:fall 3.6s linear forwards;z-index:40;pointer-events:none}
-    @keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
-    .trail{position:fixed;pointer-events:none;font-size:14px;opacity:.9;animation:trailFade .8s ease forwards;z-index:30}
-    @keyframes trailFade{to{transform:translateY(-10px) scale(1.6);opacity:0}}
+    .btn:hover{ transform:scale(1.05); background:#ff73a6 }
+
+    /* blok teks + typing */
+    #message{
+      display:none;
+      opacity:0;
+      transition:opacity 0.8s ease;
+      max-width:680px;
+      margin:12px auto 0;
+      padding:0 16px;
+      line-height:1.7;
+      color:#555;
+      z-index:5;
+      position:relative;
+      text-wrap:pretty;
+    }
+    #message span.sparkle{
+      position:absolute;
+      font-size:16px;
+      color:#ff9cc6;
+      animation:sparkleFade 1.3s linear forwards
+    }
+    @keyframes sparkleFade{
+      0%{opacity:1; transform:scale(.8) translateY(0)}
+      100%{opacity:0; transform:scale(1.6) translateY(-20px)}
+    }
+
+    /* Hearts background kecil-kecil */
+    .heart{
+      position:fixed;
+      bottom:-10px;
+      width:18px; height:18px;
+      background:pink;
+      transform:rotate(45deg);
+      animation:floatUp 6s linear forwards;
+      z-index:1;
+      pointer-events:none;
+    }
+    .heart::before,.heart::after{
+      content:'';
+      position:absolute;
+      width:18px; height:18px;
+      background:pink; border-radius:50%
+    }
+    .heart::before{ top:-9px; left:0 }
+    .heart::after{ top:0; left:9px }
+    @keyframes floatUp{
+      0%{transform:translateY(0) rotate(45deg);opacity:1}
+      100%{transform:translateY(-110vh) rotate(45deg);opacity:0}
+    }
+
+    /* Quotes mengambang di atas */
+    #quoteBox{
+      display:none;
+      position:sticky;        /* biar tetap kebaca saat scroll */
+      top:calc(8px + var(--safe-top));
+      left:50%;
+      transform:translateX(-50%);
+      background:rgba(255,255,255,.6);
+      border:1px solid rgba(255,255,255,.7);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:14px;
+      color:#7a5c6d;
+      z-index:6;
+      opacity:0;
+      transition:opacity .6s;
+      backdrop-filter: blur(6px);
+      max-width:90vw;
+    }
+    #quoteText{ white-space:nowrap }
+
+    /* Pertanyaan pertama (YES/NO) */
+    #loveQuestion{
+      display:none;
+      opacity:0;
+      transition:opacity 0.8s ease;
+      margin-top:28px;
+      z-index:5;
+      position:relative;
+      min-height:110px;             /* ruang buat tombol kabur */
+    }
+    #loveQuestion .row{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    #noBtn{
+      position:absolute;            /* ✅ bisa kabur bebas */
+      left:50%;
+      top:60px;
+      transform:translateX(-50%);
+      background:#ffb6c1;
+    }
+
+    /* Step berikutnya */
+    #fromText{
+      display:none; opacity:0; transition:opacity 0.8s ease;
+      margin-top:16px; font-family:'Great Vibes',cursive; font-size:26px; color:#ff5c8a; z-index:5
+    }
+    #hugBtn{
+      display:none; opacity:0; transition:opacity 0.8s ease;
+      margin-top:18px; background:#ffc6d9
+    }
+
+    /* Popup */
+    #popup{
+      display:none;
+      position:fixed; inset:0; z-index:50;
+      align-items:center; justify-content:center;
+      background:rgba(255,200,230,.85);
+      backdrop-filter:blur(4px);
+      animation:fadeIn .8s ease;
+    }
+    #popupInner{ text-align:center; color:#ff6fa8; padding:0 18px }
+    #popupInner h2{ font-family:'Great Vibes',cursive; font-size:40px; margin:0 0 6px }
+    #popupInner p{ margin:6px 0 0; font-size:18px; color:#a64b73 }
+    @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+    /* Amplop terbang */
+    #envelope{
+      display:none; position:fixed; bottom:20px; right:20px; z-index:4; font-size:28px; animation:flyUp 6s ease-in forwards
+    }
+    @keyframes flyUp{ to{ transform:translate(-40vw,-80vh); opacity:0 } }
+
+    /* Music */
+    #musicBtn{
+      position:fixed;
+      right:calc(16px + var(--safe-right));
+      bottom:calc(16px + var(--safe-bottom));       /* ✅ aman dari home bar iPhone */
+      width:52px; height:52px;
+      border-radius:50%;
+      border:none;
+      background:var(--pink-2);
+      color:#fff;
+      font-size:22px;
+      box-shadow:0 4px 14px rgba(0,0,0,.15);
+      cursor:pointer;
+      display:none;                                  /* muncul setelah mulai */
+      z-index:20;                                   /* ✅ selalu di atas */
+      touch-action:manipulation;
+    }
+    #musicBtn:hover{ transform:scale(1.08); background:#ff99b3 }
+
+    /* Love Flow berikut */
+    #loveFlow{ display:none; z-index:6; margin-top:24px }
+    #loveFlow .row{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      position:relative;
+      min-height:60px;           /* ruang untuk tombol “biasa aja” kabur */
+    }
+    #loveMeh{ background:#ffb6c1; }
+    #seriousBox{ display:none; margin-top:14px }
+    #meterBox{ display:none; margin-top:14px }
+
+    /* Meter */
+    #meter{
+      width:80vw;
+      max-width:520px;
+      height:18px;
+      background:#ffe4ee;
+      border-radius:999px;
+      margin:12px auto;
+      position:relative;
+      overflow:hidden;
+      border:1px solid #ffd1e2
+    }
+    #meterFill{
+      position:absolute; left:0; top:0; bottom:0;
+      width:0%;
+      background:linear-gradient(90deg,#ff9cc6,#ff73a6);
+      box-shadow:0 0 12px rgba(255,115,166,.45) inset;
+      transition:width .3s ease
+    }
+    #percentNum{ font-weight:800; color:#ff4f92 }
+
+    /* Confetti hearts */
+    .c-heart{
+      position:fixed; top:-10px; font-size:18px; animation:fall 3.6s linear forwards; z-index:40; pointer-events:none
+    }
+    @keyframes fall{ to{ transform:translateY(110vh) rotate(360deg); opacity:.2 } }
+
+    /* Sparkle trail cursor (opsional di mobile akan jarang muncul) */
+    .trail{ position:fixed; pointer-events:none; font-size:14px; opacity:.9; animation:trailFade .8s ease forwards; z-index:30 }
+    @keyframes trailFade{ to{ transform:translateY(-10px) scale(1.6); opacity:0 } }
+
+    /* kecilkan padding pada device kecil */
+    @media (max-width:420px){
+      .btn{ padding:12px 18px; font-size:16px }
+      h1{ font-size:28px }
+    }
   </style>
 </head>
 <body>
   <div id="bokeh"></div>
 
-  <button id="startBtn" class="btn">Klik dulu Liaaa 💖</button>
-  <div id="message"></div>
-  <div id="quoteBox"><span id="quoteText"></span></div>
-  <div id="loveQuestion">
-    <h1>Do you love me, Liaaa? 😳💞</h1>
-    <button id="yesBtn" class="btn">Yes 💕</button>
-    <button id="noBtn" class="btn" style="background:#ffb6c1">No 💔</button>
-  </div>
+  <div class="wrap">
+    <button id="startBtn" class="btn">Klik dulu Liaaa 💖</button>
 
-  <div id="fromText">From Rei untuk Liaaa 💌</div>
-  <button id="hugBtn" class="btn">Peluk Liaa 🤗</button>
+    <div id="message"></div>
 
-  <div id="popup">
-    <div id="popupInner">
-      <h2>I love you Liaaa 💗</h2>
-      <p>Liaaa nyaa jangan sakit yaa… Rei sayang Liaaa selaluuu 🥺💞</p>
+    <div id="quoteBox"><span id="quoteText"></span></div>
+
+    <!-- Step: Do you love me -->
+    <div id="loveQuestion">
+      <h1>Do you love me, Liaaa? 😳💞</h1>
+      <div class="row" id="loveRow1">
+        <button id="yesBtn" class="btn">Yes 💕</button>
+        <!-- No kabur (absolute) -->
+        <button id="noBtn" class="btn">No 💔</button>
+      </div>
+    </div>
+
+    <div id="fromText">From Rei untuk Liaaa 💌</div>
+    <button id="hugBtn" class="btn">Peluk Liaa 🤗</button>
+
+    <div id="popup">
+      <div id="popupInner">
+        <h2>I love you Liaaa 💗</h2>
+        <p>Liaaa nyaa jangan sakit yaa… Rei sayang Liaaa selaluuu 🥺💞</p>
+      </div>
+    </div>
+
+    <div id="envelope">💌</div>
+
+    <!-- Flow lanjutan -->
+    <div id="loveFlow">
+      <h1>Lia sayang nggak sama Rei? 🥺</h1>
+
+      <div class="row" id="loveRow2">
+        <button id="loveYes" class="btn">Iyaa sayang bngtt 🥺💞</button>
+        <button id="loveMeh" class="btn">Biasa aja 😝</button>
+      </div>
+
+      <div id="seriousBox">
+        <button id="seriousBtn" class="btn">Serius? 😳</button>
+      </div>
+
+      <div id="meterBox">
+        <div style="margin-top:10px">Berapa % Lia sayang sama Rei? 🫶</div>
+        <div style="display:flex; gap:8px; justify-content:center; align-items:center; margin-top:8px">
+          <input id="percentInput" type="number" min="1" max="100" value="100"
+                 style="padding:10px 12px;border-radius:10px;border:1px solid #ffc6d9; outline:none; width:120px; text-align:center"/>
+          <button id="setPercent" class="btn">Set</button>
+        </div>
+
+        <div id="meter">
+          <div id="meterFill"></div>
+        </div>
+        <div id="percentLabel"><span id="percentNum">0%</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- Flow lanjutan -->
-  <div id="loveFlow">
-    <h1>Lia sayang nggak sama Rei? 🥺</h1>
-    <div>
-      <button id="loveYes" class="btn">Iyaa sayang bngtt 🥺💞</button>
-      <button id="loveMeh" class="btn" style="background:#ffb6c1">Biasa aja 😝</button>
-    </div>
-    <div id="seriousBox"><button id="seriousBtn" class="btn">Serius? 😳</button></div>
-    <div id="meterBox" style="display:none;">
-      <div style="margin-top:10px">Berapa % Lia sayang sama Rei? 🫶</div>
-      <input id="percentInput" type="number" min="1" max="100" value="100" style="margin-top:8px;padding:8px 10px;border-radius:10px;border:1px solid #ffc6d9;outline:none;width:120px;text-align:center"/>
-      <button id="setPercent" class="btn" style="margin-left:8px">Set</button>
-      <div id="meter"><div id="meterFill"></div></div>
-      <div id="percentLabel"><span id="percentNum">0%</span></div>
-    </div>
-  </div>
+  <button id="musicBtn">🎵</button>
 
-  <button id="musicBtn" style="display:none;">🎵</button>
-
+  <!-- Musik: main & ending mellow -->
   <audio id="bgMusic" loop>
     <source src="https://files.catbox.moe/x3pf5v.mp3" type="audio/mpeg">
   </audio>
@@ -128,75 +362,329 @@
   </audio>
 
   <script>
-    const startBtn=document.getElementById('startBtn'),msg=document.getElementById('message'),
-    loveQ=document.getElementById('loveQuestion'),yesBtn=document.getElementById('yesBtn'),noBtn=document.getElementById('noBtn'),
-    fromTxt=document.getElementById('fromText'),hugBtn=document.getElementById('hugBtn'),popup=document.getElementById('popup'),
-    quoteBox=document.getElementById('quoteBox'),quoteText=document.getElementById('quoteText'),
-    musicBtn=document.getElementById('musicBtn'),bgMusic=document.getElementById('bgMusic'),endMusic=document.getElementById('endMusic'),
-    loveFlow=document.getElementById('loveFlow'),loveYes=document.getElementById('loveYes'),loveMeh=document.getElementById('loveMeh'),
-    seriousBox=document.getElementById('seriousBox'),seriousBtn=document.getElementById('seriousBtn'),
-    meterBox=document.getElementById('meterBox'),percentInput=document.getElementById('percentInput'),
-    setPercent=document.getElementById('setPercent'),meterFill=document.getElementById('meterFill'),
-    percentNum=document.getElementById('percentNum');
+    // ===== Elements =====
+    const startBtn   = document.getElementById('startBtn');
+    const msg        = document.getElementById('message');
+    const loveQ      = document.getElementById('loveQuestion');
+    const loveRow1   = document.getElementById('loveRow1');
+    const yesBtn     = document.getElementById('yesBtn');
+    const noBtn      = document.getElementById('noBtn');
+    const fromTxt    = document.getElementById('fromText');
+    const hugBtn     = document.getElementById('hugBtn');
+    const popup      = document.getElementById('popup');
+    const envelope   = document.getElementById('envelope');
+    const quoteBox   = document.getElementById('quoteBox');
+    const quoteText  = document.getElementById('quoteText');
+    const musicBtn   = document.getElementById('musicBtn');
+    const bgMusic    = document.getElementById('bgMusic');
+    const endMusic   = document.getElementById('endMusic');
 
-    const mainText="Haloooo Liaa cantikss kamu cantikkk bangeetts dehh membuatt hari2 rei jadi tenang damai bahagia bngttt... semua cape2 ku yg ku genggam rasanya seperti tidak ada apa-apanya semenjak adaa liaa 😳💗 hehee cuma mau ngasihtau kalau rei syg bngt sama lia hm 🥺💞";
-    const quotes=["Liaaa nyaa jangan sakit yaa.. 🥺","Rei sayang Liaaa selaluuu 💞","Lia sayang ga sama Rei? 😳"];
-    let qIdx=0,qTimer=null;
+    const loveFlow   = document.getElementById('loveFlow');
+    const loveRow2   = document.getElementById('loveRow2');
+    const loveYes    = document.getElementById('loveYes');
+    const loveMeh    = document.getElementById('loveMeh');
+    const seriousBox = document.getElementById('seriousBox');
+    const seriousBtn = document.getElementById('seriousBtn');
+    const meterBox   = document.getElementById('meterBox');
+    const percentInput = document.getElementById('percentInput');
+    const setPercent   = document.getElementById('setPercent');
+    const meterFill    = document.getElementById('meterFill');
+    const percentNum   = document.getElementById('percentNum');
 
+    // ===== Texts =====
+    const mainText = "Haloooo Liaa cantikss kamu cantikkk bangeetts dehh membuatt hari2 rei jadi tenang damai bahagia bngttt... semua cape2 ku yg ku genggam rasanya seperti tidak ada apa-apanya semenjak adaa liaa 😳💗 hehee cuma mau ngasihtau kalau rei syg bngt sama lia hm 🥺💞";
+    const quotes = [
+      "Liaaa nyaa jangan sakit yaa.. 🥺",
+      "Rei sayang Liaaa selaluuu 💞",
+      "Lia sayang ga sama Rei? 😳"
+    ];
+
+    // ===== Quotes rotator =====
+    let qIdx = 0, qTimer = null;
     function cycleQuotes(){
-      quoteBox.style.display='block';quoteBox.style.opacity='1';quoteText.textContent=quotes[qIdx%quotes.length];qIdx++;
-      qTimer=setInterval(()=>{quoteText.style.opacity='0';setTimeout(()=>{quoteText.textContent=quotes[qIdx%quotes.length];qIdx++;quoteText.style.opacity='1';},350)},2400);
+      quoteBox.style.display = 'block';
+      requestAnimationFrame(()=> quoteBox.style.opacity = '1');
+      quoteText.textContent = quotes[qIdx % quotes.length];
+      qIdx++;
+      qTimer = setInterval(()=>{
+        quoteText.style.opacity = '0';
+        setTimeout(()=>{
+          quoteText.textContent = quotes[qIdx % quotes.length];
+          qIdx++;
+          quoteText.style.opacity = '1';
+        }, 250);
+      }, 2400);
     }
 
-    function sparkle(el){const s=document.createElement('span');s.className='sparkle';s.innerHTML='✨';
-      s.style.left=Math.random()*80+'%';s.style.top=Math.random()*25+'%';el.appendChild(s);setTimeout(()=>s.remove(),1300);}
-    function typingEffect(el,txt,speed=45){let i=0;(function type(){if(i<txt.length){el.innerHTML+=txt.charAt(i);if(Math.random()>0.7)sparkle(el);i++;setTimeout(type,speed);}else{setTimeout(()=>{loveQ.style.display='block';setTimeout(()=>loveQ.style.opacity='1',80);},900);}})();}
-    function createHearts(){setInterval(()=>{const h=document.createElement('div');h.className='heart';h.style.left=Math.random()*100+'%';h.style.animationDuration=(4+Math.random()*2)+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),6000);},420);}
-    document.addEventListener('mousemove',(e)=>{const t=document.createElement('div');t.className='trail';t.textContent='✨';t.style.left=e.clientX+'px';t.style.top=e.clientY+'px';document.body.appendChild(t);setTimeout(()=>t.remove(),800)},{passive:true});
+    // ===== Typing + sparkles =====
+    function sparkle(el){
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.innerHTML = '✨';
+      s.style.left = Math.random()*80+'%';
+      s.style.top  = Math.random()*25+'%';
+      el.appendChild(s);
+      setTimeout(()=>s.remove(),1300);
+    }
+    function typingEffect(el, txt, speed=45){
+      let i=0;
+      (function type(){
+        if(i<txt.length){
+          el.innerHTML += txt.charAt(i);
+          if(Math.random()>0.7) sparkle(el);
+          i++;
+          setTimeout(type, speed);
+        }else{
+          setTimeout(()=>{
+            // munculkan step YES/NO
+            loveQ.style.display='block';
+            requestAnimationFrame(()=> loveQ.style.opacity='1');
+            // fokusin ke pertanyaan biar user tau
+            setTimeout(()=> loveQ.scrollIntoView({behavior:'smooth', block:'center'}), 200);
+          }, 800);
+        }
+      })();
+    }
 
-    startBtn.addEventListener('click',()=>{
-      startBtn.style.display='none';msg.style.display='block';setTimeout(()=>msg.style.opacity='1',100);
-      typingEffect(msg,mainText);createHearts();cycleQuotes();
-      let v=0;bgMusic.volume=0;bgMusic.play().catch(()=>{});const fade=setInterval(()=>{if(v<0.35){v+=0.02;bgMusic.volume=v;}else clearInterval(fade);},120);
+    // ===== Hearts background =====
+    function createHearts(){
+      setInterval(()=>{
+        const h = document.createElement('div');
+        h.className='heart';
+        h.style.left = Math.random()*100+'%';
+        h.style.animationDuration = (4+Math.random()*2)+'s';
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6200);
+      }, 420);
+    }
+
+    // ===== Cursor sparkle trail (desktop akan terlihat, mobile jarang) =====
+    document.addEventListener('mousemove', (e)=>{
+      const t = document.createElement('div');
+      t.className='trail'; t.textContent='✨';
+      t.style.left=e.clientX+'px'; t.style.top=e.clientY+'px';
+      document.body.appendChild(t);
+      setTimeout(()=>t.remove(),800);
+    }, {passive:true});
+
+    // ===== Start =====
+    startBtn.addEventListener('click', ()=>{
+      startBtn.style.display='none';
+      msg.style.display='block';
+      requestAnimationFrame(()=> msg.style.opacity='1');
+      typingEffect(msg, mainText);
+      createHearts();
+      cycleQuotes();
+      // Musik start
+      bgMusic.volume=.35;
+      bgMusic.play().catch(()=>{});
       musicBtn.style.display='block';
     });
 
-    noBtn.addEventListener('mouseover',()=>{
-      const maxX=window.innerWidth-150,maxY=window.innerHeight-150;
-      noBtn.style.left=Math.random()*maxX+'px';noBtn.style.top=Math.random()*maxY+'px';
+    // ===== “No 💔” kabur (mouse & touch) =====
+    function moveButtonRand(btn, container){
+      const rect = container.getBoundingClientRect();
+      const maxX = Math.max(0, rect.width - btn.offsetWidth);
+      const maxY = Math.max(0, rect.height - btn.offsetHeight);
+      // random posisi
+      const x = Math.random()*maxX;
+      const y = 60 + Math.random()*(maxY-60); // kasih jarak dari judul
+      btn.style.left = x + 'px';
+      btn.style.top  = y + 'px';
+    }
+
+    // Kabur saat hover (desktop)
+    noBtn.addEventListener('mouseover', ()=>{
+      moveButtonRand(noBtn, loveQuestion);
+    });
+    // Kabur saat nyaris di-tap (mobile iPhone)
+    noBtn.addEventListener('touchstart', (e)=>{
+      e.preventDefault(); // cegah tap langsung
+      moveButtonRand(noBtn, loveQuestion);
+    }, {passive:false});
+
+    // (Optional) kalau tetap berhasil di-tap, kasih respon lucu
+    noBtn.addEventListener('click', ()=>{
+      noBtn.textContent = 'Eits jangan :(';
+      setTimeout(()=> moveButtonRand(noBtn, loveQuestion), 120);
     });
 
-    yesBtn.addEventListener('click',()=>{
-      loveQ.innerHTML="<h1>Hehehe aku tau kok Liaa sayang Rei 😳💞</h1>";
-      setTimeout(()=>{fromTxt.style.display='block';hugBtn.style.display='inline-block';
-        setTimeout(()=>{fromTxt.style.opacity='1';hugBtn.style.opacity='1';},80);},1800);
-    });
+    // ===== YES flow =====
+    yesBtn.addEventListener('click', ()=>{
+      // anim kecil
+      loveQ.style.animation='shake .35s';
+      setTimeout(()=> loveQ.style.animation='', 360);
 
-    hugBtn.addEventListener('click',()=>{
-      for(let i=0;i<16;i++){setTimeout(()=>sparkle(hugBtn),i*70);}
-      setTimeout(()=>{popup.style.display='flex';},1200);
+      // ubah teks & sembunyikan row YES/NO biar rapi
+      loveQ.querySelector('h1').innerHTML = "Hehehe aku tau kok Liaa sayang Rei 😳💞";
+      loveRow1.style.opacity = '0';
       setTimeout(()=>{
-        popup.style.display='none';if(qTimer)clearInterval(qTimer),quoteBox.style.opacity='0';
-        bgMusic.pause();endMusic.volume=.35;endMusic.play().catch(()=>{});loveFlow.style.display='block';
-      },3000);
+        loveRow1.style.display = 'none';
+      }, 200);
+
+      // tampilkan “From” dan “Peluk”
+      setTimeout(()=>{
+        fromTxt.style.display='block';
+        hugBtn.style.display='inline-block';
+        requestAnimationFrame(()=>{
+          fromTxt.style.opacity='1';
+          hugBtn.style.opacity='1';
+        });
+      }, 800);
     });
 
-    loveMeh.addEventListener('mouseover',()=>{
-      loveMeh.style.position='relative';loveMeh.style.left=(Math.random()*160-80)+'px';loveMeh.style.top=(Math.random()*80-40)+'px';
-    });
-    loveYes.addEventListener('click',()=>{seriousBox.style.display='block';});
-    seriousBtn.addEventListener('click',()=>{
-      meterBox.style.display='block';setTimeout(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}),50);
+    // ===== Hug → popup + envelope + lanjut flow pertanyaan baru =====
+    hugBtn.addEventListener('click', ()=>{
+      // sparkle di tombol
+      for(let i=0;i<16;i++){ setTimeout(()=>sparkle(hugBtn), i*70); }
+      setTimeout(()=>{
+        popup.style.display='flex';
+        // envelope terbang
+        envelope.style.display='block';
+      }, 1000);
+
+      // setelah beberapa detik, tutup popup & tampilkan flow baru
+      setTimeout(()=>{
+        popup.style.display='none';
+        envelope.style.display='none';
+        // stop quote rotator
+        if(qTimer) { clearInterval(qTimer); qTimer=null; quoteBox.style.opacity='0'; }
+        // ganti musik ke ending mellow
+        bgMusic.pause();
+        endMusic.currentTime = 0;
+        endMusic.volume=.35;
+        endMusic.play().catch(()=>{});
+        // tampilkan flow tambahan
+        loveFlow.style.display='block';
+        loveFlow.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 3000);
     });
 
-    setPercent.addEventListener('click',()=>{
-      let val=parseInt(percentInput.value||'0',10);if(isNaN(val)||val<1)val=1;if(val>100)val=100;
-      let cur=0;percentNum.textContent='0%';meterFill.style.width='0%';
-      const step=()=>{if(cur<val){cur+=Math.ceil(Math.max(1,(val-cur)/20));if(cur>val)cur=val;percentNum.textContent=cur+'%';meterFill.style.width=cur+'%';requestAnimationFrame(step);}else{dropConfetti();setTimeout(()=>{const endLine=document.createElement('div');endLine.style.marginTop='10px';endLine.style.color='#ff4f92';endLine.style.fontWeight='700';endLine.textContent=`Aaaa Liaaa nyaa sayang Rei ${val}%!! 😭💗 Rei bahagia bangett~`;meterBox.appendChild(endLine);},400);}};requestAnimationFrame(step);
+    // ===== Flow: Lia sayang gak? =====
+    // “Biasa aja” kabur (mouse & touch)
+    function jitter(btn){
+      btn.style.position='relative';
+      btn.style.left = (Math.random()*160-80)+'px';
+      btn.style.top  = (Math.random()*80-40)+'px';
+    }
+    loveMeh.addEventListener('mouseover', ()=> jitter(loveMeh));
+    loveMeh.addEventListener('touchstart', (e)=>{ e.preventDefault(); jitter(loveMeh); }, {passive:false});
+    loveMeh.addEventListener('click', ()=> jitter(loveMeh)); // kalau masih kena, geser lagi
+
+    // “Iyaa sayang bngtt” → munculin “Serius?”
+    loveYes.addEventListener('click', ()=>{
+      // sembunyikan row pilihan agar next step bersih
+      loveRow2.style.opacity = '0';
+      setTimeout(()=>{ loveRow2.style.display='none'; }, 200);
+
+      // tampilkan tombol “Serius?”
+      setTimeout(()=>{
+        seriousBox.style.display='block';
+        seriousBox.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 260);
     });
 
-    function dropConfetti(){for(let i=0;i<50;i++){setTimeout(()=>{const c=document.createElement('div');c.className='c-heart';c.textContent=['💗','💖','💕','💞'][Math.floor(Math.random()*4)];c.style.left=Math.random()*100+'%';c.style.fontSize=(16+Math.random()*16)+'px';c.style.animationDuration=(2.8+Math.random()*1.6)+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),3600);},i*35);}}
-    let playing=true;musicBtn.addEventListener('click',()=>{const prim=(endMusic.currentTime>0&&!endMusic.paused)?endMusic:bgMusic;if(playing){prim.pause();musicBtn.textContent='🔇';}else{prim.play().catch(()=>{});musicBtn.textContent='🎵';}playing=!playing;});
+    // “Serius?” → munculkan meter, hilangkan tombol sebelumnya biar ringkas
+    seriousBtn.addEventListener('click', ()=>{
+      seriousBox.style.opacity = '0';
+      setTimeout(()=>{ seriousBox.style.display='none'; }, 160);
+
+      setTimeout(()=>{
+        meterBox.style.display='block';
+        meterBox.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 200);
+    });
+
+    // ===== Set percent → animasi bar + counter + confetti + pesan akhir kecil =====
+    setPercent.addEventListener('click', ()=>{
+      let val = parseInt(percentInput.value || '0',10);
+      if(isNaN(val) || val<1) val=1;
+      if(val>100) val=100;
+
+      // animate number & bar
+      let cur=0;
+      percentNum.textContent='0%';
+      meterFill.style.width='0%';
+
+      const step = () =>{
+        if(cur < val){
+          cur += Math.ceil(Math.max(1, (val-cur)/20));
+          if(cur>val) cur=val;
+          percentNum.textContent = cur + '%';
+          meterFill.style.width = cur + '%';
+          requestAnimationFrame(step);
+        }else{
+          // confetti hearts
+          dropConfetti();
+          // pesan kecil
+          setTimeout(()=>{
+            const endLine = document.createElement('div');
+            endLine.style.marginTop='10px';
+            endLine.style.color='#ff4f92';
+            endLine.style.fontWeight='700';
+            endLine.textContent = `Aaaa Liaaa nyaa sayang Rei ${val}%!! 😭💗 Rei bahagia bangett~`;
+            meterBox.appendChild(endLine);
+            // scroll dikit biar keliatan
+            meterBox.scrollIntoView({behavior:'smooth', block:'center'});
+          }, 400);
+        }
+      };
+      requestAnimationFrame(step);
+    });
+
+    function dropConfetti(){
+      for(let i=0;i<50;i++){
+        setTimeout(()=>{
+          const c = document.createElement('div');
+          c.className='c-heart';
+          c.textContent = ['💗','💖','💕','💞'][Math.floor(Math.random()*4)];
+          c.style.left = Math.random()*100+'%';
+          c.style.fontSize = (16+Math.random()*16)+'px';
+          c.style.animationDuration = (2.8+Math.random()*1.6)+'s';
+          document.body.appendChild(c);
+          setTimeout(()=>c.remove(),3600);
+        }, i*35);
+      }
+    }
+
+    // ===== Music toggle (tetep di pojok kanan bawah) =====
+    let playing = true;
+    musicBtn.addEventListener('click', ()=>{
+      const prim = (endMusic.currentTime>0 && !endMusic.paused) ? endMusic : bgMusic;
+      if(playing){ prim.pause(); musicBtn.textContent='🔇'; }
+      else { prim.play().catch(()=>{}); musicBtn.textContent='🎵'; }
+      playing = !playing;
+    });
+
+    // ===== Triple-click easter egg =====
+    let clicks = 0, lastClick = 0;
+    document.addEventListener('click', ()=>{
+      const now = Date.now();
+      if(now - lastClick < 500) clicks++; else clicks=1;
+      lastClick = now;
+      if(clicks>=3){
+        clicks=0;
+        const eg = document.createElement('div');
+        eg.style.position='fixed'; eg.style.left='50%'; eg.style.top='50%';
+        eg.style.transform='translate(-50%,-50%)'; eg.style.background='rgba(255,255,255,.9)';
+        eg.style.border='1px solid #ffd1e2'; eg.style.padding='10px 14px'; eg.style.borderRadius='12px';
+        eg.style.boxShadow='0 8px 24px rgba(0,0,0,.15)'; eg.style.zIndex=60; eg.style.fontWeight='700';
+        eg.textContent='Hehee ketauan deh Liaa nyaa 😳💞';
+        document.body.appendChild(eg);
+        setTimeout(()=> eg.remove(), 1400);
+      }
+    });
+
+    // ===== Small helper: iOS audio policy (coba autoplay halus) =====
+    window.addEventListener('load', ()=>{
+      // coba play halus; iOS sering butuh gesture, jadi gagal juga gak masalah
+      bgMusic.volume=.35;
+      bgMusic.play().then(()=>{
+        musicBtn.style.display='block';
+      }).catch(()=>{
+        // akan tampil setelah user klik "Klik dulu Liaaa 💖"
+      });
+    });
   </script>
 </body>
 </html>
